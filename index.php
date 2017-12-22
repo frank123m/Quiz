@@ -1,19 +1,15 @@
 <?php
 
 if (isset($_GET['submit'])) {
-	
+
 	$query = $_SERVER['QUERY_STRING'];
 	$q = substr($query, 0, 7);
 	$ans = substr($query, 8, 1);
-	
-	setcookie($q, $ans, time() + 3600);	
-	
-	switch($q) {
-		case 'answer1': header('Location: index.php?step=2'); break;
-		case 'answer2': header('Location: index.php?step=3'); break;
-		case 'answer3': header('Location: index.php?step=4'); break;
-		case 'answer4': header('Location: index.php?result=true'); break;
-	}
+	$next = substr($q, 6, 1) + 1;
+
+	setcookie($q, $ans, time() + 3600);
+	header('Location: index.php?step=' . $next);
+	exit; /* 雖然跳轉了, 但是底下還是會執行, 所以用這一行跳離. */
 
 }
 
@@ -33,9 +29,7 @@ if (isset($_GET['submit'])) {
 <p>線上心理測驗：</p>
 <p><a href="index.php?step=1">準備好了嗎？請按此開始測驗！</a></p>
 
-<?php endif; ?>
-
-<?php if (isset($_GET['step']) && ($_GET['step'] == 1)) : ?>
+<?php elseif (isset($_GET['step']) && ($_GET['step'] == 1)) : ?>
 
 <p>假如你是一支兔子：</p>
 
@@ -93,9 +87,7 @@ if (isset($_GET['submit'])) {
 	</p>
 </form>
 
-<?php endif; ?>
-
-<?php if (isset($_GET['result']) && ($_GET['result'] == 'true')) : ?>
+<?php elseif (isset($_GET['step']) && ($_GET['step'] == 5)) : ?>
 
 <p>分析結果：</p>
 
@@ -112,7 +104,7 @@ if (isset($_COOKIE[$a[0]], $_COOKIE[$a[1]], $_COOKIE[$a[2]], $_COOKIE[$a[3]])) {
 		case '2': echo '<p>你對自己的未來充滿自信，相信你這一生不會白活才對！</p>'; break;
 		case '3': echo '<p>你是為了別人而活！忙忙碌碌過一生，有點可憐！</p>'; break;
 	}
-	
+
 	echo '<p>【愛情觀】</p>';
 
 	switch ($_COOKIE['answer2']) {
