@@ -20,19 +20,20 @@ if (isset($_GET['submit'])) {
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>心理測驗</title>
+<title><?php echo $msgs['title']; ?></title>
 </head>
 
 <body>
 
 <?php if ($_SERVER['QUERY_STRING'] == '') : ?>
 
-<p>心理測驗：</p>
-<p><a href="index.php?step=1">準備好了嗎？請按此開始測驗！</a></p>
+<p><?php echo $msgs['title']; ?></p>
+<p><?php echo $msgs['content']; ?></p>
+<p><a href="index.php?step=1"><?php echo $msgs['start']; ?></a></p>
 
 <?php elseif (isset($_GET['step']) && ($_GET['step'] != 5)) : ?>
 
-<p>假如你是一支兔子：</p>
+<p><?php echo $msgs['emu']; ?></p>
 
 <?php
 
@@ -54,13 +55,13 @@ $ans3 = $data1[$q_index][3];
 		<input type="radio" name="<?php echo $c_name; ?>" value="3"><?php echo $ans3; ?>
 	</p>
 	<p>
-		<input type="submit" name="submit" value="下一步">
+		<input type="submit" name="submit" value="<?php echo ($_GET['step'] == 4) ? $msgs['result'] : $msgs['next']; ?>">
 	</p>
 </form>
 
 <?php elseif (isset($_GET['step']) && ($_GET['step'] == 5)) : ?>
 
-<p>分析結果：</p>
+<p><?php echo $msgs['ana']; ?></p>
 
 <?php
 
@@ -84,7 +85,7 @@ setcookie('answer4', '', time() - 1);
 
 ?>
 
-<p><a href="./">重來一次!</a></p>
+<p><a href="./"><?php echo $msgs['restart']; ?></a></p>
 
 <?php endif; ?>
 
