@@ -36,8 +36,8 @@ $data2 = array(
 	),
 	array(
 		'【愛情觀】',
-		'你可能對你的愛情不能專心，常常半路就會放棄跑去睡覺！',
-		'你遇到愛情會無法自拔，會墜入愛情的迷網裡！頭腦暈暈的。',
+		'你可能對你的愛情不能專心，常常半路就會放棄！',
+		'你遇到愛情會無法自拔，會墜入愛情的迷網裡！',
 		'你對愛沒啥渴望，心中缺乏愛。'
 	),
 	array(
@@ -73,14 +73,14 @@ if (isset($_GET['submit'])) {
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>線上心理測驗</title>
+<title>心理測驗</title>
 </head>
 
 <body>
 
 <?php if ($_SERVER['QUERY_STRING'] == '') : ?>
 
-<p>線上心理測驗：</p>
+<p>心理測驗：</p>
 <p><a href="index.php?step=1">準備好了嗎？請按此開始測驗！</a></p>
 
 <?php elseif (isset($_GET['step']) && ($_GET['step'] != 5)) : ?>
@@ -121,17 +121,12 @@ $a = array('answer1', 'answer2', 'answer3', 'answer4');
 
 if (isset($_COOKIE[$a[0]], $_COOKIE[$a[1]], $_COOKIE[$a[2]], $_COOKIE[$a[3]])) {
 
-	echo '<p>【人生觀態度】</p>';	
-	echo $data2[0][$_COOKIE['answer1']];
-	
-	echo '<p>【愛情觀】</p>';
-	echo $data2[1][$_COOKIE['answer2']];
+	foreach ($data2 as $key => $value) {
 
-	echo '<p>【對金錢的看法】</p>';
-	echo $data2[2][$_COOKIE['answer3']];
+		echo '<p>' . $value[0] . '</p>';
+		echo '<p>' . $value[$_COOKIE[$a[$key]]] . '</p>';
 
-	echo '<p>【對家的感覺！包括對家人的態度】</p>';
-	echo $data2[3][$_COOKIE['answer4']];
+	}
 
 }
 
