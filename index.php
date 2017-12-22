@@ -1,35 +1,22 @@
 <?php
 
+/* 下面這個表單判斷程式區塊, 或許可以改用直接取 query 的方式改寫. */
+
 if (isset($_GET['submit'])) {
 
 	if (isset($_GET['answer1']) && ($_GET['answer1'] != '')) {
 		setcookie('answer1', $_GET['answer1'], time() + 3600);
-		header('Location: lesson10.php?step=2');
-	}
-
-	if (isset($_GET['answer2']) && ($_GET['answer2'] != '')) {
+		header('Location: index.php?step=2');
+	} elseif (isset($_GET['answer2']) && ($_GET['answer2'] != '')) {
 		setcookie('answer2', $_GET['answer2'], time() + 3600);
-		header('Location: lesson10.php?step=3');
-	}
-
-	if (isset($_GET['answer3']) && ($_GET['answer3'] != '')) {
+		header('Location: index.php?step=3');
+	} elseif (isset($_GET['answer3']) && ($_GET['answer3'] != '')) {
 		setcookie('answer3', $_GET['answer3'], time() + 3600);
-		header('Location: lesson10.php?step=4');
-	}
-
-	if (isset($_GET['answer4']) && ($_GET['answer4'] != '')) {
+		header('Location: index.php?step=4');
+	} elseif (isset($_GET['answer4']) && ($_GET['answer4'] != '')) {
 		setcookie('answer4', $_GET['answer4'], time() + 3600);
-		header('Location: lesson10.php?result=true');
+		header('Location: index.php?result=true');
 	}
-
-}
-
-if (isset($_GET['restart']) && ($_GET['restart'] != '')) {
-
-	setcookie('answer1', '', time() - 1);
-	setcookie('answer2', '', time() - 1);
-	setcookie('answer3', '', time() - 1);
-	setcookie('answer4', '', time() - 1);
 
 }
 
@@ -44,15 +31,14 @@ if (isset($_GET['restart']) && ($_GET['restart'] != '')) {
 
 <body>
 
+<?php if ($_SERVER['QUERY_STRING'] == '') : ?>
+
 <p>線上心理測驗：</p>
+<p><a href="index.php?step=1">準備好了嗎？請按此開始測驗！</a></p>
 
-<?php if (($_SERVER['QUERY_STRING'] == '') || isset($_GET['restart'])) { ?>
+<?php endif; ?>
 
-<p><a href="lesson10.php?step=1">準備好了嗎？請按此開始測驗！</a></p>
-
-<?php } ?>
-
-<?php if (isset($_GET['step']) && ($_GET['step'] == 1)) { ?>
+<?php if (isset($_GET['step']) && ($_GET['step'] == 1)) : ?>
 
 <p>假如你是一支兔子：</p>
 
@@ -71,15 +57,15 @@ if (isset($_GET['restart']) && ($_GET['restart'] != '')) {
 	</p>
 </form>
 
-<?php } else if (isset($_GET['step']) && ($_GET['step'] == 2)) { ?>
+<?php elseif (isset($_GET['step']) && ($_GET['step'] == 2)) : ?>
 
 <form method="get">
 	<p>中途遇見一隻兔子，長的漂漂亮亮，躺在路邊一動也不動的，你心裡想：</p>
 	<p>
 		<input type="radio" name="answer2" value="1" checked="checked">
-		他暈倒了<br>
-		<input type="radio" name="answer2" value="2">
 		他在休息<br>
+		<input type="radio" name="answer2" value="2">
+		他暈倒了<br>
 		<input type="radio" name="answer2" value="3">
 		他死了
 	</p>
@@ -88,7 +74,7 @@ if (isset($_GET['restart']) && ($_GET['restart'] != '')) {
 	</p>
 </form>
 
-<?php } else if (isset($_GET['step']) && ($_GET['step'] == 3)) { ?>
+<?php elseif (isset($_GET['step']) && ($_GET['step'] == 3)) : ?>
 
 <form method="get">
 	<p>過橋一半的時候，你回家的唯一鑰匙掉到橋下，你會：</p>
@@ -105,10 +91,10 @@ if (isset($_GET['restart']) && ($_GET['restart'] != '')) {
 	</p>
 </form>
 
-<?php } else if (isset($_GET['step']) && ($_GET['step'] == 4)) { ?>
+<?php elseif (isset($_GET['step']) && ($_GET['step'] == 4)) : ?>
 
 <form method="get">
-	<p>回到家你沒有鑰匙你會怎麼回家？</p>
+	<p>回到家，你沒有鑰匙你會怎麼辦？</p>
 	<p>
 		<input type="radio" name="answer4" value="1" checked="checked">
 		不回家<br>
@@ -122,9 +108,9 @@ if (isset($_GET['restart']) && ($_GET['restart'] != '')) {
 	</p>
 </form>
 
-<?php } ?>
+<?php endif; ?>
 
-<?php if (isset($_GET['result']) && ($_GET['result'] == 'true')) { ?>
+<?php if (isset($_GET['result']) && ($_GET['result'] == 'true')) : ?>
 
 <p>分析結果：</p>
 
@@ -222,11 +208,16 @@ if (isset($_COOKIE['answer4']) && ($_COOKIE['answer4'] != '')) {
 
 }
 
+setcookie('answer1', '', time() - 1);
+setcookie('answer2', '', time() - 1);
+setcookie('answer3', '', time() - 1);
+setcookie('answer4', '', time() - 1);
+
 ?>
 
-<p><a href="lesson10.php?restart=true">重來一次!</a></p>
+<p><a href="./">重來一次!</a></p>
 
-<?php } ?>
+<?php endif; ?>
 
 </body>
 
