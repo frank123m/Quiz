@@ -66,16 +66,16 @@ $ans3 = $data1[$q_index][3];
 
 <?php
 
-$a = array('answer1', 'answer2', 'answer3', 'answer4');
-
 foreach ($data2 as $key => $value) {
 
-	if (isset($_COOKIE[$a[$key]])) {
+	$cn = 'answer' . ($key + 1); /* cookie name */
+
+	if (isset($_COOKIE[$cn])) {
 
 		echo '<p>' . $value[0] . '</p>';
-		echo '<p>' . $value[$_COOKIE[$a[$key]]] . '</p>';
+		echo '<p>' . $value[$_COOKIE[$cn]] . '</p>';
 
-		setcookie($a[$key], '', time());
+		setcookie($cn, '', time()); /* delete cookie */
 
 	}
 
@@ -90,3 +90,4 @@ foreach ($data2 as $key => $value) {
 </body>
 
 </html>
+
