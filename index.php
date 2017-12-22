@@ -20,20 +20,20 @@ if (isset($_GET['submit'])) {
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title><?php echo $msgs['title']; ?></title>
+<title><?= $msgs['title']; ?></title>
 </head>
 
 <body>
 
-<p><?php echo $msgs['title']; ?></p>
+<p><?= $msgs['title']; ?></p>
 
 <?php if ($_SERVER['QUERY_STRING'] == '') : ?>
 
-<p><a href="index.php?step=1"><?php echo $msgs['start']; ?></a></p>
+<p><a href="index.php?step=1"><?= $msgs['start']; ?></a></p>
 
 <?php elseif (isset($_GET['step']) && ($_GET['step'] != 5)) : ?>
 
-<p><?php echo $msgs['emu']; ?></p>
+<p><?= $msgs['emu']; ?></p>
 
 <?php
 
@@ -48,20 +48,20 @@ $ans3 = $data1[$q_index][3];
 ?>
 
 <form method="get">
-	<p><?php echo $question; ?></p>
+	<p><?= $question; ?></p>
 	<p>
-		<input type="radio" name="<?php echo $c_name; ?>" value="1" checked="checked"><?php echo $ans1; ?><br>
-		<input type="radio" name="<?php echo $c_name; ?>" value="2"><?php echo $ans2; ?><br>
-		<input type="radio" name="<?php echo $c_name; ?>" value="3"><?php echo $ans3; ?>
+		<input type="radio" name="<?= $c_name; ?>" value="1" checked="checked"><?= $ans1; ?><br>
+		<input type="radio" name="<?= $c_name; ?>" value="2"><?= $ans2; ?><br>
+		<input type="radio" name="<?= $c_name; ?>" value="3"><?= $ans3; ?>
 	</p>
 	<p>
-		<input type="submit" name="submit" value="<?php echo ($_GET['step'] == 4) ? $msgs['result'] : $msgs['next']; ?>">
+		<input type="submit" name="submit" value="<?= ($_GET['step'] == 4) ? $msgs['result'] : $msgs['next']; ?>">
 	</p>
 </form>
 
 <?php elseif (isset($_GET['step']) && ($_GET['step'] == 5)) : ?>
 
-<p><?php echo $msgs['ana']; ?></p>
+<p><?= $msgs['ana']; ?></p>
 
 <?php
 
@@ -82,7 +82,7 @@ foreach ($data2 as $key => $value) {
 
 ?>
 
-<p><a href="./"><?php echo $msgs['restart']; ?></a></p>
+<p><a href="./"><?= $msgs['restart']; ?></a></p>
 
 <?php endif; ?>
 
