@@ -16,10 +16,11 @@ if (isset($_GET['submit'])) {
 
 ?>
 
-<html>
+<!doctype html>
+<html lang="zh-Hant-TW">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
 <title><?= $msgs['title']; ?></title>
 </head>
 
