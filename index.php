@@ -25,10 +25,10 @@ if (isset($_GET['submit'])) {
 
 <body>
 
+<p><?php echo $msgs['title']; ?></p>
+
 <?php if ($_SERVER['QUERY_STRING'] == '') : ?>
 
-<p><?php echo $msgs['title']; ?></p>
-<p><?php echo $msgs['content']; ?></p>
 <p><a href="index.php?step=1"><?php echo $msgs['start']; ?></a></p>
 
 <?php elseif (isset($_GET['step']) && ($_GET['step'] != 5)) : ?>
@@ -67,21 +67,18 @@ $ans3 = $data1[$q_index][3];
 
 $a = array('answer1', 'answer2', 'answer3', 'answer4');
 
-if (isset($_COOKIE[$a[0]], $_COOKIE[$a[1]], $_COOKIE[$a[2]], $_COOKIE[$a[3]])) {
+foreach ($data2 as $key => $value) {
 
-	foreach ($data2 as $key => $value) {
+	if (isset($_COOKIE[$a[$key]])) {
 
 		echo '<p>' . $value[0] . '</p>';
 		echo '<p>' . $value[$_COOKIE[$a[$key]]] . '</p>';
 
+		setcookie($a[$key], '', time());
+
 	}
 
 }
-
-setcookie('answer1', '', time() - 1);
-setcookie('answer2', '', time() - 1);
-setcookie('answer3', '', time() - 1);
-setcookie('answer4', '', time() - 1);
 
 ?>
 
