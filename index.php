@@ -1,5 +1,32 @@
 <?php
 
+$data = array(
+	array(
+		'有一天你經過一座橋，橋下風景很漂亮，你會：',
+		'慢慢走過去',
+		'開開心心蹦蹦跳跳過去',
+		'急急忙忙跑過去'
+	),
+	array(
+		'中途遇見一隻兔子，長的漂漂亮亮，躺在路邊一動也不動的，你心裡想：',
+		'他在休息',
+		'他暈倒了',
+		'他死了'
+	),
+	array(
+		'過橋一半的時候，你回家的唯一鑰匙掉到橋下，你會：',
+		'奮不顧身的下去撿',
+		'在橋上觀望再下去撿',
+		'撿都不撿就回家了'
+	),
+	array(
+		'回到家門口，你沒有鑰匙會怎麼辦？',
+		'去朋友家',
+		'找可能的入口翻進去',
+		'等家人回來開門'
+	),
+);
+
 if (isset($_GET['submit'])) {
 
 	$query = $_SERVER['QUERY_STRING'];
@@ -29,61 +56,31 @@ if (isset($_GET['submit'])) {
 <p>線上心理測驗：</p>
 <p><a href="index.php?step=1">準備好了嗎？請按此開始測驗！</a></p>
 
-<?php elseif (isset($_GET['step']) && ($_GET['step'] == 1)) : ?>
+<?php elseif (isset($_GET['step']) && ($_GET['step'] != 5)) : ?>
 
 <p>假如你是一支兔子：</p>
 
+<?php
+
+$c_name = 'answer' . $_GET['step']; /* 設定 cookie 名稱 */
+$q_index = $_GET['step'] - 1; /* 設定問題索引值 */
+
+$question = $data[$q_index][0];
+$ans1 = $data[$q_index][1];
+$ans2 = $data[$q_index][2];
+$ans3 = $data[$q_index][3];
+
+?>
+
 <form method="get">
-	<p>有一天你經過一座橋，橋下風景很漂亮，你會：</p>
+	<p><?php echo $question; ?></p>
 	<p>
-		<input type="radio" name="answer1" value="1" checked="checked">慢慢走過去<br>
-		<input type="radio" name="answer1" value="2">開開心心蹦蹦跳跳過去<br>
-		<input type="radio" name="answer1" value="3">急急忙忙跑過去
+		<input type="radio" name="<?php echo $c_name; ?>" value="1" checked="checked"><?php echo $ans1; ?><br>
+		<input type="radio" name="<?php echo $c_name; ?>" value="2"><?php echo $ans2; ?><br>
+		<input type="radio" name="<?php echo $c_name; ?>" value="3"><?php echo $ans3; ?>
 	</p>
 	<p>
 		<input type="submit" name="submit" value="下一步">
-	</p>
-</form>
-
-<?php elseif (isset($_GET['step']) && ($_GET['step'] == 2)) : ?>
-
-<form method="get">
-	<p>中途遇見一隻兔子，長的漂漂亮亮，躺在路邊一動也不動的，你心裡想：</p>
-	<p>
-		<input type="radio" name="answer2" value="1" checked="checked">他在休息<br>
-		<input type="radio" name="answer2" value="2">他暈倒了<br>
-		<input type="radio" name="answer2" value="3">他死了
-	</p>
-	<p>
-		<input type="submit" name="submit" value="下一步">
-	</p>
-</form>
-
-<?php elseif (isset($_GET['step']) && ($_GET['step'] == 3)) : ?>
-
-<form method="get">
-	<p>過橋一半的時候，你回家的唯一鑰匙掉到橋下，你會：</p>
-	<p>
-		<input type="radio" name="answer3" value="1" checked="checked">你會奮不顧身的下去撿<br>
-		<input type="radio" name="answer3" value="2">在橋上觀望再下去揀<br>
-		<input type="radio" name="answer3" value="3">揀都不揀就回家了
-	</p>
-	<p>
-		<input type="submit" name="submit" value="下一步">
-	</p>
-</form>
-
-<?php elseif (isset($_GET['step']) && ($_GET['step'] == 4)) : ?>
-
-<form method="get">
-	<p>回到家，你沒有鑰匙你會怎麼辦？</p>
-	<p>
-		<input type="radio" name="answer4" value="1" checked="checked">找朋友<br>
-		<input type="radio" name="answer4" value="2">找可能的入口翻進去<br>
-		<input type="radio" name="answer4" value="3">等家人回來開門
-	</p>
-	<p>
-		<input type="submit" name="submit" value="看測驗結果">
 	</p>
 </form>
 
