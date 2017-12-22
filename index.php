@@ -1,6 +1,6 @@
 <?php
 
-$data = array(
+$data1 = array(
 	array(
 		'有一天你經過一座橋，橋下風景很漂亮，你會：',
 		'慢慢走過去',
@@ -24,7 +24,34 @@ $data = array(
 		'去朋友家',
 		'找可能的入口翻進去',
 		'等家人回來開門'
+	)
+);
+
+$data2 = array(
+	array(
+		'【人生觀態度】',
+		'你對自己未來沒有把握！總是邊走邊看走一步算一步的那種！',
+		'你對自己的未來充滿自信，相信你這一生不會白活才對！',
+		'你是為了別人而活！忙忙碌碌過一生，有點可憐！'
 	),
+	array(
+		'【愛情觀】',
+		'你可能對你的愛情不能專心，常常半路就會放棄跑去睡覺！',
+		'你遇到愛情會無法自拔，會墜入愛情的迷網裡！頭腦暈暈的。',
+		'你對愛沒啥渴望，心中缺乏愛。'
+	),
+	array(
+		'【對金錢的看法】',
+		'你貪財如命，會為了錢誤了你的一生。',
+		'你對金錢管理會謹慎一點，常會想買一個東西而想好久才買，買了不喜歡的會難過好久！',
+		'你對金錢比較不在乎，視金錢如糞土的人用金錢收買不了他的心的！'
+	),
+	array(
+		'【對家的感覺！包括對家人的態度】',
+		'你對家沒甚麼依賴度 如果發生事情你會找朋友而不會想到家人。',
+		'你對家人的態度有時會很不耐煩，但事後又會很後悔，但你還是會想家的。',
+		'你的家庭一定很美滿，你跟家人處的很好，彼此會互相照顧，是個很顧家的人！'
+	)
 );
 
 if (isset($_GET['submit'])) {
@@ -65,10 +92,10 @@ if (isset($_GET['submit'])) {
 $c_name = 'answer' . $_GET['step']; /* 設定 cookie 名稱 */
 $q_index = $_GET['step'] - 1; /* 設定問題索引值 */
 
-$question = $data[$q_index][0];
-$ans1 = $data[$q_index][1];
-$ans2 = $data[$q_index][2];
-$ans3 = $data[$q_index][3];
+$question = $data1[$q_index][0];
+$ans1 = $data1[$q_index][1];
+$ans2 = $data1[$q_index][2];
+$ans3 = $data1[$q_index][3];
 
 ?>
 
@@ -94,37 +121,17 @@ $a = array('answer1', 'answer2', 'answer3', 'answer4');
 
 if (isset($_COOKIE[$a[0]], $_COOKIE[$a[1]], $_COOKIE[$a[2]], $_COOKIE[$a[3]])) {
 
-	echo '<p>【人生觀態度】</p>';
-
-	switch ($_COOKIE['answer1']) {
-		case '1': echo '<p>你對自己未來沒有把握！總是邊走邊看走一步算一步的那種！</p>'; break;
-		case '2': echo '<p>你對自己的未來充滿自信，相信你這一生不會白活才對！</p>'; break;
-		case '3': echo '<p>你是為了別人而活！忙忙碌碌過一生，有點可憐！</p>'; break;
-	}
-
+	echo '<p>【人生觀態度】</p>';	
+	echo $data2[0][$_COOKIE['answer1']];
+	
 	echo '<p>【愛情觀】</p>';
-
-	switch ($_COOKIE['answer2']) {
-		case '1': echo '<p>你可能對你的愛情不能專心，常常半路就會放棄跑去睡覺！</p>'; break;
-		case '2': echo '<p>你遇到愛情會無法自拔，會墜入愛情的迷網裡！頭腦暈暈的。</p>'; break;
-		case '3': echo '<p>你對愛沒啥渴望，心中缺乏愛。</p>'; break;
-	}
+	echo $data2[1][$_COOKIE['answer2']];
 
 	echo '<p>【對金錢的看法】</p>';
-
-	switch ($_COOKIE['answer3']) {
-		case '1': echo '<p>你貪財如命，會為了錢誤了你的一生。</p>'; break;
-		case '2': echo '<p>你對金錢管理會謹慎一點，常會想買一個東西而想好久才買，買了不喜歡的會難過好久！</p>'; break;
-		case '3': echo '<p>你對金錢比較不在乎，視金錢如糞土的人用金錢收買不了他的心的！</p>'; break;
-	}
+	echo $data2[2][$_COOKIE['answer3']];
 
 	echo '<p>【對家的感覺！包括對家人的態度】</p>';
-
-	switch ($_COOKIE['answer4']) {
-		case '1': echo '<p>你對家沒甚麼依賴度 如果發生事情你會找朋友而不會想到家人。</p>'; break;
-		case '2': echo '<p>你對家人的態度有時會很不耐煩，但事後又會很後悔，但你還是會想家的。</p>'; break;
-		case '3': echo '<p>你的家庭一定很美滿，你跟家人處的很好，彼此會互相照顧，是個很顧家的人！</p>'; break;
-	}
+	echo $data2[3][$_COOKIE['answer4']];
 
 }
 
