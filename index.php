@@ -38,8 +38,9 @@ if (isset($_GET['submit'])) {
 
 <?php
 
-$cn = 'answer' . $_GET['step']; /* cookie name */
-$q_index = $_GET['step'] - 1; /* question index */
+$step = $_GET['step'];
+$cn = 'answer' . $step; /* cookie name */
+$q_index = $step - 1; /* question index */
 
 $question = $data1[$q_index][0];
 $ans1 = $data1[$q_index][1];
@@ -56,7 +57,7 @@ $ans3 = $data1[$q_index][3];
 		<input type="radio" name="<?= $cn; ?>" value="3"><?= $ans3; ?>
 	</p>
 	<p>
-		<input type="submit" name="submit" value="<?= ($_GET['step'] == 4) ? $msgs['result'] : $msgs['next']; ?>">
+		<input type="submit" name="submit" value="<?= ($step == 4) ? $msgs['result'] : $msgs['next']; ?>">
 	</p>
 </form>
 
