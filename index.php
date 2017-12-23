@@ -32,6 +32,10 @@ if (isset($_GET['submit'])) {
 
 <p><a href="index.php?step=1"><?= $msgs['start']; ?></a></p>
 
+<?php elseif (isset($_GET['step']) && (!in_array($_GET['step'], range(1, 5)))) : ?>
+
+<p><?= $msgs['404']; ?></p>
+
 <?php elseif (isset($_GET['step']) && ($_GET['step'] != 5)) : ?>
 
 <p><?= $msgs['emu']; ?></p>
