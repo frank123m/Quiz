@@ -10,7 +10,7 @@ if (isset($_GET['submit'])) {
 
 	setcookie($q, $ans, time() + 3600);
 	header('Location: index.php?step=' . $next);
-	exit; /* 雖然跳轉了, 但是底下還是會執行, 所以用這一行跳離. */
+	exit;
 
 }
 
@@ -38,8 +38,8 @@ if (isset($_GET['submit'])) {
 
 <?php
 
-$c_name = 'answer' . $_GET['step']; /* 設定 cookie 名稱 */
-$q_index = $_GET['step'] - 1; /* 設定問題索引值 */
+$cn = 'answer' . $_GET['step']; /* cookie name */
+$q_index = $_GET['step'] - 1; /* question index */
 
 $question = $data1[$q_index][0];
 $ans1 = $data1[$q_index][1];
@@ -51,9 +51,9 @@ $ans3 = $data1[$q_index][3];
 <form method="get">
 	<p><?= $question; ?></p>
 	<p>
-		<input type="radio" name="<?= $c_name; ?>" value="1" checked="checked"><?= $ans1; ?><br>
-		<input type="radio" name="<?= $c_name; ?>" value="2"><?= $ans2; ?><br>
-		<input type="radio" name="<?= $c_name; ?>" value="3"><?= $ans3; ?>
+		<input type="radio" name="<?= $cn; ?>" value="1" checked="checked"><?= $ans1; ?><br>
+		<input type="radio" name="<?= $cn; ?>" value="2"><?= $ans2; ?><br>
+		<input type="radio" name="<?= $cn; ?>" value="3"><?= $ans3; ?>
 	</p>
 	<p>
 		<input type="submit" name="submit" value="<?= ($_GET['step'] == 4) ? $msgs['result'] : $msgs['next']; ?>">
@@ -68,14 +68,14 @@ $ans3 = $data1[$q_index][3];
 
 foreach ($data2 as $key => $value) {
 
-	$cn = 'answer' . ($key + 1); /* cookie name */
+	$cn = 'answer' . ($key + 1);
 
 	if (isset($_COOKIE[$cn])) {
 
 		echo '<p>' . $value[0] . '</p>';
 		echo '<p>' . $value[$_COOKIE[$cn]] . '</p>';
 
-		setcookie($cn, '', time()); /* delete cookie */
+		setcookie($cn, '', time());
 
 	}
 
