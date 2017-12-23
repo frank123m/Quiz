@@ -28,11 +28,11 @@ if (isset($_GET['submit'])) {
 
 <p><?= $msgs['title']; ?></p>
 
-<?php if ($_SERVER['QUERY_STRING'] == '' || !isset($_GET['step'])) : ?>
+<?php if ($_SERVER['QUERY_STRING'] == '') : ?>
 
 <p><a href="index.php?step=1"><?= $msgs['start']; ?></a></p>
 
-<?php elseif (!in_array($_GET['step'], range(1, 5))) : ?>
+<?php elseif (!isset($_GET['step']) || !in_array($_GET['step'], range(1, 5))) : ?>
 
 <p><?= $msgs['404']; ?></p>
 
