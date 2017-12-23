@@ -28,15 +28,15 @@ if (isset($_GET['submit'])) {
 
 <p><?= $msgs['title']; ?></p>
 
-<?php if ($_SERVER['QUERY_STRING'] == '') : ?>
+<?php if ($_SERVER['QUERY_STRING'] == '' || !isset($_GET['step'])) : ?>
 
 <p><a href="index.php?step=1"><?= $msgs['start']; ?></a></p>
 
-<?php elseif (isset($_GET['step']) && (!in_array($_GET['step'], range(1, 5)))) : ?>
+<?php elseif (!in_array($_GET['step'], range(1, 5))) : ?>
 
 <p><?= $msgs['404']; ?></p>
 
-<?php elseif (isset($_GET['step']) && ($_GET['step'] != 5)) : ?>
+<?php elseif ($_GET['step'] != 5) : ?>
 
 <p><?= $msgs['emu']; ?></p>
 
@@ -65,7 +65,7 @@ $ans3 = $data1[$q_index][3];
 	</p>
 </form>
 
-<?php elseif (isset($_GET['step']) && ($_GET['step'] == 5)) : ?>
+<?php else : ?>
 
 <p><?= $msgs['ana']; ?></p>
 
