@@ -30,65 +30,46 @@ if (isset($_GET['submit'])) {
 
 <?php if ($_SERVER['QUERY_STRING'] == '') : ?>
 
-<p><a href="index.php?step=1"><?= $msgs['start']; ?></a></p>
+	<p><a href="index.php?step=1"><?= $msgs['start']; ?></a></p>
 
 <?php elseif (!isset($_GET['step']) || !in_array($_GET['step'], range(1, 5))) : ?>
 
-<p><?= $msgs['404']; ?></p>
+	<p><?= $msgs['404']; ?></p>
 
-<?php elseif ($_GET['step'] != 5) : ?>
+<?php elseif ($_GET['step'] != 5) : $step = $_GET['step']; $cn = 'answer' . $step; $q_index = $step - 1; ?>
 
-<p><?= $msgs['emu']; ?></p>
+	<p><?= $msgs['emu']; ?></p>
 
-<?php
-
-$step = $_GET['step'];
-$cn = 'answer' . $step; /* cookie name */
-$q_index = $step - 1; /* question index */
-
-$question = $data1[$q_index][0];
-$ans1 = $data1[$q_index][1];
-$ans2 = $data1[$q_index][2];
-$ans3 = $data1[$q_index][3];
-
-?>
-
-<form method="get">
-	<p><?= $question; ?></p>
-	<p>
-		<input type="radio" name="<?= $cn; ?>" value="1" checked="checked"><?= $ans1; ?><br>
-		<input type="radio" name="<?= $cn; ?>" value="2"><?= $ans2; ?><br>
-		<input type="radio" name="<?= $cn; ?>" value="3"><?= $ans3; ?>
-	</p>
-	<p>
-		<input type="submit" name="submit" value="<?= ($step == 4) ? $msgs['result'] : $msgs['next']; ?>">
-	</p>
-</form>
+	<form method="get">
+		<p><?= $data1[$q_index][0]; ?></p>
+		<p>
+			<input type="radio" name="<?= $cn; ?>" value="1" checked="checked"><?= $data1[$q_index][1]; ?><br>
+			<input type="radio" name="<?= $cn; ?>" value="2"><?= $data1[$q_index][2]; ?><br>
+			<input type="radio" name="<?= $cn; ?>" value="3"><?= $data1[$q_index][3]; ?>
+		</p>
+		<p>
+			<input type="submit" name="submit" value="<?= ($step == 4) ? $msgs['result'] : $msgs['next']; ?>">
+		</p>
+	</form>
 
 <?php else : ?>
 
-<p><?= $msgs['ana']; ?></p>
+	<p><?= $msgs['ana']; ?></p>
 
-<?php
+	<?php foreach ($data2 as $key => $value) : $cn = 'answer' . ($key + 1); ?>
 
-foreach ($data2 as $key => $value) {
+		<?php if (isset($_COOKIE[$cn])) : ?>
 
-	$cn = 'answer' . ($key + 1);
+			<p><?= $value[0]; ?></p>
+			<p><?= $value[$_COOKIE[$cn]]; ?></p>
 
-	if (isset($_COOKIE[$cn])) {
+			<?php setcookie($cn, '', time()); ?>
 
-		echo '<p>' . $value[0] . '</p>';
-		echo '<p>' . $value[$_COOKIE[$cn]] . '</p>';
+		<?php endif; ?>
 
-		setcookie($cn, '', time());
+	<?php endforeach; ?>
 
-	}
-
-}
-
-?>
-
-<p><a href="./"><?= $msgs['restart']; ?></a></p>
+	<p><a href="./"><?= $msgs['restart']; ?></a></p>
 
 <?php endif; ?>
 
