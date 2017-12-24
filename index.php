@@ -38,7 +38,7 @@ if (isset($_GET['submit'])) {
 <?php else : ?>
 <p><?= $msgs['ana']; ?></p>
 <?php foreach ($data2 as $key => $value) : $cn = 'answer' . ($key + 1); ?>
-<?php if (isset($_COOKIE[$cn])) : setcookie($cn, '', time()); ?>
+<?php if (isset($_COOKIE[$cn]) && in_array($_COOKIE[$cn], range(1, 3))) : setcookie($cn, '', time()); ?>
 	<p><?= $value[0]; ?></p>
 	<p><?= $value[$_COOKIE[$cn]]; ?></p>
 <?php endif; ?>
